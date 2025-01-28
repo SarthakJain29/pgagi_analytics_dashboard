@@ -1,22 +1,22 @@
-// src/components/TemperatureChart.tsx
+import React from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-"use client";
+type TemperatureChartProps = {
+  data: Array<any>;
+};
 
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
-
-// Type definition for the props
-interface TemperatureChartProps {
-  data: any[];  // Adjust the type according to your API response
-}
-
-const TemperatureChart = ({ data }: TemperatureChartProps) => (
-  <LineChart width={600} height={300} data={data}>
-    <CartesianGrid strokeDasharray="3 3" />
-    <XAxis dataKey="dt_txt" />
-    <YAxis />
-    <Tooltip />
-    <Line type="monotone" dataKey="main.temp" stroke="#8884d8" />
-  </LineChart>
-);
+const TemperatureChart: React.FC<TemperatureChartProps> = ({ data }) => {
+  return (
+    <ResponsiveContainer width="100%" height={400}>
+      <LineChart data={data}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="date" />
+        <YAxis />
+        <Tooltip />
+        <Line type="monotone" dataKey="temperature" stroke="#8884d8" />
+      </LineChart>
+    </ResponsiveContainer>
+  );
+};
 
 export default TemperatureChart;
